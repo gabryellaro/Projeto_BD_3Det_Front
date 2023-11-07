@@ -1,0 +1,21 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* background-image: url("./assets/backgrounddet.png"); */
+  background: #FDB100 ;
+  background-size: cover;
+  background-repeat: no-repeat; 
+  width: 100%;
+}
+
+.app-custom {
+  background-image: url("./assets/backgrounddet.png");
+  height: 100vh; /* Ajuste a altura para cobrir a altura da janela do navegador */
+  background-size: cover; /* Redimensiona a imagem para cobrir a área completa */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode:multiply;
+  mix-blend-mode:multiply;
+  /* Outros estilos, se necessário */
+}
