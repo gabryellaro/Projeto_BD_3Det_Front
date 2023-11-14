@@ -1,21 +1,36 @@
-html, body {
-  height: 100%;
+html,
+body {
   margin: 0;
   padding: 0;
-  /* background-image: url("./assets/backgrounddet.png"); */
-  background: #FDB100 ;
+  background-image: url("./assets/3DeT-fundo-opacidade\ 1.png");
+  /* Ajuste a altura para cobrir a altura da janela do navegador */
   background-size: cover;
-  background-repeat: no-repeat; 
-  width: 100%;
+  /* Redimensiona a imagem para cobrir a área completa */
+  background-repeat: no-repeat;
+  background-position: center;
+  mix-blend-mode: multiply;
+  /* Outros estilos, se necessário */
 }
 
 .app-custom {
-  background-image: url("./assets/backgrounddet.png");
-  height: 100vh; /* Ajuste a altura para cobrir a altura da janela do navegador */
-  background-size: cover; /* Redimensiona a imagem para cobrir a área completa */
-  background-repeat: no-repeat;
-  background-position: center;
-  background-blend-mode:multiply;
-  mix-blend-mode:multiply;
-  /* Outros estilos, se necessário */
+  height: 100vh;
+  background: #FDB100;
+  display: flex;
 }
+
+.space-configure{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.det-custom-logo{
+  width: 200px;
+
+}
+
+/* .space-config{
+  
+} */
