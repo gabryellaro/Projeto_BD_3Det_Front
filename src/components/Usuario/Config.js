@@ -107,7 +107,7 @@ function Config() {
   return (
     <div className="user-config">
       {/* <Cadastro/>  */}
-      <Link to="/">Home</Link>
+      <Link className="custom-link" to="/">Voltar</Link>
       <h2>Lista de Usuários</h2>
       <TableContainer component={Paper}>
         <Table className="table-config">
@@ -126,7 +126,6 @@ function Config() {
                   />
                   <button className="button-custom-search" onClick={searchUser}><img src={IconLupa}></img></button>
                 </div>
-
               </TableCell>
               <TableCell>
                 {userFound && (
@@ -135,7 +134,31 @@ function Config() {
                     setUserFound(false); // Voltar ao estado inicial
                     setSearchedUser(null);
                   }}>Limpar Pesquisa</Button>
-                )}</TableCell></TableRow>
+                )}</TableCell>
+              <TableCell>
+                {selectedUser && ( // Se um usuário for selecionado, exiba o formulário de atualização
+                  <div>
+                    <select
+                      className="custom-select"
+                      value={campoToUpdate}
+                      onChange={(e) => setCampoToUpdate(e.target.value)}>
+                      <option value="email">Email</option>
+                      <option value="username">Username</option>
+                      <option value="nome">Nome</option>
+                      <option value="senha">Senha</option>
+                    </select>
+                    <input
+                      id="outlined-basic"
+                      type="text"
+                      placeholder={`Novo ${campoToUpdate}`}
+                      value={userData[campoToUpdate]}
+                      onChange={(e) => setUserData({ ...userData, [campoToUpdate]: e.target.value })}
+                    />
+                    <button className="custom-button3"onClick={updateUser}>Atualizar Usuário</button>
+                  </div>
+                )}
+              </TableCell>
+            </TableRow>
             <TableRow>
               <TableCell align="center">Username</TableCell>
               <TableCell align="center">Email</TableCell>
@@ -174,28 +197,6 @@ function Config() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      {selectedUser && ( // Se um usuário for selecionado, exiba o formulário de atualização
-        <div>
-          <h2>Atualizar Usuário</h2>
-          <select
-            value={campoToUpdate}
-            onChange={(e) => setCampoToUpdate(e.target.value)}
-          >
-            <option value="email">Email</option>
-            <option value="username">Username</option>
-            <option value="nome">Nome</option>
-            <option value="senha">Senha</option>
-          </select>
-          <input
-            type="text"
-            placeholder={`Novo ${campoToUpdate}`}
-            value={userData[campoToUpdate]}
-            onChange={(e) => setUserData({ ...userData, [campoToUpdate]: e.target.value })}
-          />
-          <button onClick={updateUser}>Atualizar Usuário</button>
-        </div>
-      )}
     </div>
   );
 }

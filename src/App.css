@@ -46,19 +46,6 @@ body {
 }
 
 
-.espada {
-  width: 100px;
-  height: 200px;
-  background: url('./assets/espada.svg')cover; /* Substitua pelo caminho da sua imagem */
-  position: absolute;
-  animation: chuvaEspadas linear infinite;
-}
-
-@keyframes chuvaEspadas {
-  to {
-    transform: translateY(100vh);
-  }
-}
 
 
 

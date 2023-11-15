@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CadastroMesa from './MesaT';
+import "./Mesa.css"
 
 function Mesa() {
   return (
     <div>
-      <h1>Bem-vindo à página da Mesa</h1>
-      <p>Esta é a página da Mesa.</p>
-        <Link to='/'>Acessar página home...</Link>
+        <Link className="custom-button2" to='/'>Voltar</Link>
+        <CadastroMesa></CadastroMesa>
     </div>
   );
 }

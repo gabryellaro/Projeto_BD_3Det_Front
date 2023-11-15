@@ -35,8 +35,6 @@
     flex-direction: column;
 }
 
-
-
 .config-link {
     text-decoration: none;
     color: black;
@@ -45,7 +43,7 @@
 }
 
 .config-link:hover{
-    background-image: linear-gradient(to left, #FDB100, rgb(218, 91, 45), rgb(241, 158, 85));
+    background-image: linear-gradient(to left, #38068d, rgb(76, 30, 168), rgb(53, 23, 142));
     color: black;
     background-clip: text;
     -webkit-background-clip: text;
