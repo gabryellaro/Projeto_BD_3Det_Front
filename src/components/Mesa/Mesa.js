@@ -5,7 +5,8 @@ function Mesa() {
   return (
     <div>
       <h1>Bem-vindo à página da Mesa</h1>
-      <p>Esta é a página da Mesa. <Link to="/">Voltar para a Home</Link></p>
+      <p>Esta é a página da Mesa.</p>
+        <Link to='/'>Acessar página home...</Link>
     </div>
   );
 }

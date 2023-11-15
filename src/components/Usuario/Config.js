@@ -14,7 +14,9 @@ import TableRow from '@mui/material/TableRow';
 import './Config.css'
 import IconDelete from "../../assets/lixo.svg"
 import IconEdit from "../../assets/atualizar.svg"
+import IconLupa from "../../assets/lupa.svg"
 import Cadastro from "./Cadastro";
+import { Link } from "react-router-dom";
 
 
 function Config() {
@@ -25,6 +27,7 @@ function Config() {
     nome: "",
     senha: ""
   });
+
   const [userEmailToUpdate, setUserEmailToUpdate] = useState("");
   const [campoToUpdate, setCampoToUpdate] = useState("email"); // Defina um valor padrão
   const [searchEmail, setSearchEmail] = useState("");
@@ -103,44 +106,36 @@ function Config() {
 
   return (
     <div className="user-config">
-     {/* <Cadastro/>  */}
+      {/* <Cadastro/>  */}
+      <Link to="/">Home</Link>
       <h2>Lista de Usuários</h2>
-      <TableContainer  component={Paper}>
+      <TableContainer component={Paper}>
         <Table className="table-config">
           <TableHead>
             <TableRow>
-              <TableCell>
-                <Box
-                  component="form"
-                  sx={{
-                    '& > :not(style)': { m: 0.5, width: '20ch', },
-                  }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <TextField
-                    InputLabelProps={{
-                      style: { fontSize: 13 }, // Ajuste o tamanho da fonte conforme necessário
-                    }}
+              <TableCell >
+                <div className="config-space-search">
+                  <input
                     id="outlined-basic"
                     type="text"
                     size="small"
-                    label="Pesquisar por Email"
+                    placeholder="Pesquisar por Email"
                     variant="outlined"
                     value={searchEmail}
                     onChange={(e) => setSearchEmail(e.target.value)}
                   />
-                  <Button onClick={searchUser}>Pesquisar</Button></Box>
-                  
-                  </TableCell>
-                
-              <TableCell> {userFound && (
-                <Button onClick={() => {
-                  setSearchEmail("");  // Limpar o campo de pesquisa
-                  setUserFound(false); // Voltar ao estado inicial
-                  setSearchedUser(null);
-                }}>Limpar Pesquisa</Button>
-              )}</TableCell></TableRow>
+                  <button className="button-custom-search" onClick={searchUser}><img src={IconLupa}></img></button>
+                </div>
+
+              </TableCell>
+              <TableCell>
+                {userFound && (
+                  <Button onClick={() => {
+                    setSearchEmail("");  // Limpar o campo de pesquisa
+                    setUserFound(false); // Voltar ao estado inicial
+                    setSearchedUser(null);
+                  }}>Limpar Pesquisa</Button>
+                )}</TableCell></TableRow>
             <TableRow>
               <TableCell align="center">Username</TableCell>
               <TableCell align="center">Email</TableCell>

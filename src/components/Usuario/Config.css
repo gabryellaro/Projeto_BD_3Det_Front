@@ -1,7 +1,13 @@
 #outlined-basic{
-    font-size: 12px;
-    background-color: aliceblue;
-    
+    font-size: 13px;
+    font-family: 'Red Rose', serif;
+    width: 170px;
+    padding: 4px;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+#outlined-basic::placeholder{
+  color:rgb(179, 179, 179);
 }
 
 .user-config{
@@ -26,9 +32,37 @@
 
 .css-rqglhn-MuiTable-root {
     border: solid black;
+    min-width: 500px;
+    min-height: 400px;
 }
 
 .css-1ex1afd-MuiTableCell-root{
     border: 1px solid black!important;
     padding: 12px;
 }
+
+.button-custom-search{
+    border:none;
+    background: none;
+    width: 20px!important;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 0px 0px 5px!important;
+}
+
+.css-1ndpvdd-MuiTableCell-root, .css-1ygcj2i-MuiTableCell-root, .css-1q1u3t4-MuiTableRow-root{
+    border-bottom: 1px solid rgb(0, 0, 0)!important;
+    /* background: #ffe4a5; */
+}
+
+.config-space-search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

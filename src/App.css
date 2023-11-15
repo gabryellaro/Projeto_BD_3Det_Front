@@ -26,10 +26,41 @@ body {
   margin: 0 auto;
 }
 
-.det-custom-logo{
-  width: 200px;
-
+.det-custom-logo {
+  width: 200px; /* ajuste o tamanho conforme necessário */
+  animation: balancarZoom 2s infinite ease-in-out;
 }
+
+@keyframes balancarZoom {
+  0%, 100% {
+    transform: rotate(0deg) scale(0.9);
+  }
+  50% {
+    transform: rotate(2deg) scale(1);
+  }
+}
+
+.container {
+  position: relative;
+  height: 100%;
+}
+
+
+.espada {
+  width: 100px;
+  height: 200px;
+  background: url('./assets/espada.svg')cover; /* Substitua pelo caminho da sua imagem */
+  position: absolute;
+  animation: chuvaEspadas linear infinite;
+}
+
+@keyframes chuvaEspadas {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+
 
 /* .space-config{
   
