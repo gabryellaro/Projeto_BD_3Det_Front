@@ -68,19 +68,9 @@ function CadastroMesa() {
     }
   };
 
-    // Função para pesquisar mesas com base no nome
-    // const searchTable = async () => {
-    //     try {
-    //       const response = await axios.get(`http://127.0.0.1:5000/pesquisar_mesa/${searchTerm}`);
-    //       setTables(response.data.mesas);
-    //     } catch (error) {
-    //       console.error("Erro ao pesquisar mesa:", error);
-    //     }
-    //   };
-    
-      useEffect(() => {
-        fetchTables();
-      }, []);
+  useEffect(() => {
+    fetchTables();
+  }, []);
 
   return (
     <div>
@@ -88,7 +78,7 @@ function CadastroMesa() {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-          <TableRow>
+            <TableRow>
               <TableCell align="center" colSpan={3}>
                 <Stack direction="row" spacing={2} alignItems="center">
                   {showInputs && (
@@ -112,14 +102,14 @@ function CadastroMesa() {
                         onChange={(e) => setTableData({ ...tableData, id_mesa: e.target.value })}
                       />
                       <div>
-                      <button className="custom-button" onClick={createTable} >Cadastrar Mesa</button>
+                        <button className="custom-button" onClick={createTable} >Cadastrar Mesa</button>
                       </div>
                     </>
                   )}
                   <div>
-                  <button className="custom-button" onClick={toggleInputs} >
-                    {showInputs ? "Cancelar" : "Cadastrar Nova Mesa"}
-                  </button>
+                    <button className="custom-button" onClick={toggleInputs} >
+                      {showInputs ? "Cancelar" : "Cadastrar Nova Mesa"}
+                    </button>
                   </div>
                 </Stack>
               </TableCell>

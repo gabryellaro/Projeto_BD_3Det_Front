@@ -3,7 +3,6 @@
     font-family: 'Red Rose', serif;
     width: 170px;
     padding: 4px;
-    border-radius: 5px;
     border: 2px solid rgb(0, 0, 0);
     margin-top: 0px;
 }
@@ -20,7 +19,7 @@
     font-family: 'Red Rose', serif!important;
     border: 2px solid black ;
     cursor:pointer;
-    border-radius: 5px;
+    margin-left:5px;
 }
 
 .outlined-basic-cadas{
@@ -28,7 +27,6 @@
     font-family: 'Red Rose', serif;
     width: 170px;
     padding: 6px;
-    border-radius: 5px;
     margin: 3px 6px 4px 0px;
     border: 2px solid rgb(0, 0, 0);
 }
@@ -117,6 +115,7 @@
 .box-config{
     font-family: 'Red Rose', serif;
     text-align: center;
+    align-items: center;
     display: flex;
     width: 100%;
     justify-content: space-between ;

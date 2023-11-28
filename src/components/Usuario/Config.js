@@ -155,7 +155,7 @@ function Config() {
                     <input
                       className="outlined-basic"
                       type="text"
-                      placeholder={`Novo ${campoToUpdate}`}
+                      placeholder={`Atualizar ${campoToUpdate}`}
                       value={userData[campoToUpdate]}
                       onChange={(e) => setUserData({ ...userData, [campoToUpdate]: e.target.value })}
                     />

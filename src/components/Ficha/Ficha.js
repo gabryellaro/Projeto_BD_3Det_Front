@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Ficha.css';
+import CadastroFicha from './CadastroFicha';
+
+
 
 function Ficha() {
   return (
-    <div className="body">  
-      <div className="container">
+    <div>  
+      <CadastroFicha/>
+      <p>Esta é a página da Ficha. <Link to="/">Voltar para a Home</Link></p>
+      {/* <div className="container">
         <p>Esta é a página da Ficha. <Link to="/">Voltar para a Home</Link></p>
         <h1>CADASTRAR FICHA</h1>
         <form>
@@ -64,7 +69,7 @@ function Ficha() {
           </div>
           <input type="submit" value="Enviar" />
         </form>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -67,7 +67,7 @@ function Cadastro({ open, handleClose }) {
         }}
       >
         <h2>Preencha as informações do novo usuário</h2>
-        <div>
+        <div className='inputs-config'>
         <input
           className="outlined-basic-cadas"
           type="text"
@@ -106,7 +106,7 @@ function Cadastro({ open, handleClose }) {
         />
         </div>
          {errorMessage && <p>{errorMessage}</p>}
-        <Stack spacing={5} direction="row">
+        <Stack className='button-config-space' spacing={5} direction="row">
           <button className="custom-button3" onClick={createUser}>
             Cadastrar
           </button>
