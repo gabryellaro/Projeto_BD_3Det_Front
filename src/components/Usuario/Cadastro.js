@@ -1,95 +1,120 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import './Config.css'
+import Modal from '@mui/material/Modal';
+import './Config.css';
 
-
-function Cadastro() {
+function Cadastro({ open, handleClose }) {
   const [userData, setUserData] = useState({
-    username: "",
-    email: "",
-    nome: "",
-    senha: ""
+    username: '',
+    email: '',
+    nome: '',
+    senha: ''
   });
 
-  // Função para criar um novo usuário
+  const handleInputChange = (field, value) => {
+    setUserData({ ...userData, [field]: value });
+  };
+
+  const [errorMessage, setErrorMessage] = useState('');
+
   const createUser = async () => {
-    // Verifica se algum campo está vazio
     if (!(userData.username && userData.email && userData.nome && userData.senha)) {
-      console.log("Preencha todos os campos");
+      setErrorMessage('Preencha todos os campos');
       return;
     }
-  
+
     try {
-      const response = await axios.post('http://127.0.0.1:5000/cadastrar_usuario', userData);
-      console.log("Usuário cadastrado com sucesso");
+      const response = await axios.post('http://168.75.100.153:5000/cadastrar_usuario', userData);
+      console.log('Usuário cadastrado com sucesso');
     } catch (error) {
-      console.error("Erro ao cadastrar o usuário:", error);
+      console.error('Erro ao cadastrar o usuário:', error);
     }
   };
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (event.target === event.currentTarget) {
+        handleClose();
+      }
+    };
+
+    if (open) {
+      document.addEventListener('click', handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [open, handleClose]);
 
   return (
-    <div className="user-config">
-      
-      <Box
-        component="form"
+    <Modal open={open} onClose={handleClose}>
+      <Box className="box-config"
         sx={{
-          '& > :not(style)': { m: 0.5, width: '20ch', display: 'flex', flexDirection: 'column', fontFamily: 'Red Rose'},
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          bgcolor: 'background.paper',
+          boxShadow: 24,
+          p: 4,
+          maxWidth: 400,
+          width: '80%',
+          borderRadius: 4
         }}
-        noValidate
-        autoComplete="off"
       >
-        <h2>Cadastrar Usuário</h2>
-        <TextField
-          InputLabelProps={{
-            style: { fontSize: 13 }, // Ajuste o tamanho da fonte conforme necessário
-          }}
-          id="outlined-basic"
+        <h2>Preencha as informações do novo usuário</h2>
+        <input
+          className="outlined-basic-cadas"
           type="text"
           size="small"
-          label="Username"
-          variant="filled" value={userData.username}
-          onChange={(e) => setUserData({ ...userData, username: e.target.value })} />
-        <TextField
+          placeholder="Username"
+          variant="filled"
+          value={userData.username}
+          onChange={(e) => handleInputChange('username', e.target.value)}
+        />
+        <input
           InputLabelProps={{
-            style: { fontSize: 13 }, // Ajuste o tamanho da fonte conforme necessário
+            style: { fontSize: 13 },
           }}
-          id="outlined-basic"
+          className="outlined-basic-cadas"
           type="text"
           size="small"
-          label="Email"
-          variant="filled" value={userData.email}
-          onChange={(e) => setUserData({ ...userData, email: e.target.value })} />
-        <TextField
-          InputLabelProps={{
-            style: { fontSize: 13 }, // Ajuste o tamanho da fonte conforme necessário
-          }}
-          id="outlined-basic"
+          placeholder="Email"
+          variant="filled"
+          value={userData.email}
+          onChange={(e) => handleInputChange('email', e.target.value)}
+        />
+        <input
+          className="outlined-basic-cadas"
           type="text"
           size="small"
-          label="Nome"
-          variant="filled" value={userData.nome}
-          onChange={(e) => setUserData({ ...userData, nome: e.target.value })} />
-        <TextField
-          InputLabelProps={{
-            style: { fontSize: 13 }, // Ajuste o tamanho da fonte conforme necessário
-          }}
-          id="outlined-basic"
+          placeholder="Nome"
+          variant="filled"
+          value={userData.nome}
+          onChange={(e) => handleInputChange('nome', e.target.value)}
+        />
+        <input
+          className="outlined-basic-cadas"
           type="password"
           size="small"
-          label="Senha"
-          variant="filled" value={userData.senha}
-          onChange={(e) => setUserData({ ...userData, senha: e.target.value })} />
+          placeholder="Senha"
+          variant="filled"
+          value={userData.senha}
+          onChange={(e) => handleInputChange('senha', e.target.value)}
+        />
+         {errorMessage && <p>{errorMessage}</p>}
         <Stack spacing={2} direction="row">
-          <Button variant="outlined" onClick={createUser}>Cadastrar</Button>
+          <button className="custom-button3" onClick={createUser}>
+            Cadastrar
+          </button>
         </Stack>
       </Box>
-
-    </div>
+    </Modal>
   );
 }
 

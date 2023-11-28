@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -34,11 +31,10 @@ function Config() {
   const [searchedUser, setSearchedUser] = useState(""); // Adicione searchedUser ao estado
   const [userFound, setUserFound] = useState(false); // Adicione userFound ao estado
   const [selectedUser, setSelectedUser] = useState(null); // Estado para rastrear o usuário selecionado
-  // const [selectCadastro, setSelectCadastro] = useEffect("");
 
   const searchUser = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:5000/pesquisar_usuario/${searchEmail}`);
+      const response = await axios.get(`http://168.75.100.153:5000/pesquisar_usuario/${searchEmail}`);
       setSearchedUser(response.data);
       setUserFound(true); // Define userFound como true se o usuário for encontrado
     } catch (error) {
@@ -51,7 +47,7 @@ function Config() {
   // Função para deletar um usuário
   const deleteUser = async (email) => {
     try {
-      await axios.delete(`http://127.0.0.1:5000/excluir_usuario/${email}`);
+      await axios.delete(`http://168.75.100.153:5000/excluir_usuario/${email}`);
       console.log("Usuário deletado com sucesso");
       setUsers(users.filter(user => user.email !== email)); // Remova o usuário da lista local
     } catch (error) {
@@ -62,7 +58,7 @@ function Config() {
   // Função para listar todos os usuários
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/listar_usuarios');
+      const response = await axios.get('http://168.75.100.153:5000/listar_usuarios');
       setUsers(response.data.usuarios); // Ajuste aqui para acessar response.data.usuarios
     } catch (error) {
       console.error("Erro ao listar usuários:", error);
@@ -87,7 +83,7 @@ function Config() {
     }
 
     try {
-      const response = await axios.put(`http://127.0.0.1:5000/atualizar_usuario/${userEmailToUpdate}/${campoToUpdate}`, updatedFields);
+      const response = await axios.put(`http://168.75.100.153:5000/atualizar_usuario/${userEmailToUpdate}/${campoToUpdate}`, updatedFields);
       console.log(response.data.message);
     } catch (error) {
       console.error("Erro ao atualizar o usuário:", error);
@@ -103,10 +99,19 @@ function Config() {
     setUserEmailToUpdate(user.email); // Define o email do usuário selecionado
   }
 
+  const [showCadastro, setShowCadastro] = useState(false);
+
+  const handleMostrarCadastro = () => {
+    setShowCadastro(true);
+  };
+
+  const handleCancelarCadastro = () => {
+    setShowCadastro(false);
+  };
 
   return (
     <div className="user-config">
-      {/* <Cadastro/>  */}
+      {/* <Cadastro /> */}
       <Link className="custom-link" to="/">Voltar</Link>
       <h2>Lista de Usuários</h2>
       <TableContainer component={Paper}>
@@ -116,7 +121,7 @@ function Config() {
               <TableCell >
                 <div className="config-space-search">
                   <input
-                    id="outlined-basic"
+                    className="outlined-basic"
                     type="text"
                     size="small"
                     placeholder="Pesquisar por Email"
@@ -148,14 +153,21 @@ function Config() {
                       <option value="senha">Senha</option>
                     </select>
                     <input
-                      id="outlined-basic"
+                      className="outlined-basic"
                       type="text"
                       placeholder={`Novo ${campoToUpdate}`}
                       value={userData[campoToUpdate]}
                       onChange={(e) => setUserData({ ...userData, [campoToUpdate]: e.target.value })}
                     />
-                    <button className="custom-button3"onClick={updateUser}>Atualizar Usuário</button>
+                    <button className="custom-button3" onClick={updateUser}>Atualizar Usuário</button>
                   </div>
+                )}
+              </TableCell>
+              <TableCell>
+                {!showCadastro ? (
+                  <button onClick={handleMostrarCadastro}>Mostrar Cadastro</button>
+                ) : (
+                  <Cadastro open={showCadastro} handleClose={handleCancelarCadastro} />
                 )}
               </TableCell>
             </TableRow>
@@ -202,3 +214,5 @@ function Config() {
 }
 
 export default Config;
+
+

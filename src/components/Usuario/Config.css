@@ -1,4 +1,4 @@
-#outlined-basic{
+.outlined-basic{
     font-size: 13px;
     font-family: 'Red Rose', serif;
     width: 170px;
@@ -6,8 +6,17 @@
     border: 2px solid rgb(0, 0, 0);
 }
 
-#outlined-basic::placeholder{
+.outlined-basic::placeholder{
   color:rgb(179, 179, 179);
+}
+
+.outlined-basic-cadas{
+    font-size: 13px;
+    font-family: 'Red Rose', serif;
+    width: 170px;
+    padding: 4px;
+    margin: 3px 6px 4px 0px;
+    border: 2px solid rgb(0, 0, 0);
 }
 
 .user-config{
@@ -43,8 +52,9 @@
 .button-custom-search{
     border:none;
     background: none;
-    width: 20px!important;
+    width: 40px!important;
     cursor: pointer;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -61,6 +71,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .custom-link{
@@ -89,4 +100,5 @@
     border: 2px solid rgb(0, 0, 0);
     margin: 10px;
 }
+
 
