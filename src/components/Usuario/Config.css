@@ -1,20 +1,34 @@
 .outlined-basic{
-    font-size: 13px;
+    font-size: 14px;
     font-family: 'Red Rose', serif;
     width: 170px;
     padding: 4px;
+    border-radius: 5px;
     border: 2px solid rgb(0, 0, 0);
+    margin-top: 0px;
 }
 
 .outlined-basic::placeholder{
   color:rgb(179, 179, 179);
 }
 
+.custom-button3{
+    background-color: blueviolet;
+    padding: 4px;
+    font-size:14px;
+    color: aliceblue;
+    font-family: 'Red Rose', serif!important;
+    border: 2px solid black ;
+    cursor:pointer;
+    border-radius: 5px;
+}
+
 .outlined-basic-cadas{
     font-size: 13px;
     font-family: 'Red Rose', serif;
     width: 170px;
-    padding: 4px;
+    padding: 6px;
+    border-radius: 5px;
     margin: 3px 6px 4px 0px;
     border: 2px solid rgb(0, 0, 0);
 }
@@ -80,18 +94,6 @@
     font-size: 18px;
 }
 
-
-.custom-button3{
-    background-color: blueviolet;
-    padding: 4px;
-    font-size:14px;
-    color: aliceblue;
-    font-family: 'Red Rose', serif!important;
-    border: 2px solid black ;
-    cursor:pointer;
-    margin: 8px;
-}
-
 .custom-select{
     font-size: 13px;
     font-family: 'Red Rose', serif;
@@ -99,6 +101,26 @@
     padding: 3px;
     border: 2px solid rgb(0, 0, 0);
     margin: 10px;
+}
+
+.config-space-general{
+    display: flex;
+}
+
+.config-space-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.box-config{
+    font-family: 'Red Rose', serif;
+    text-align: center;
+    display: flex;
+    width: 100%;
+    justify-content: space-between ;
+    flex-direction: column;
 }
 
 

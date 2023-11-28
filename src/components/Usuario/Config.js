@@ -119,27 +119,27 @@ function Config() {
           <TableHead>
             <TableRow>
               <TableCell >
-                <div className="config-space-search">
-                  <input
-                    className="outlined-basic"
-                    type="text"
-                    size="small"
-                    placeholder="Pesquisar por Email"
-                    variant="outlined"
-                    value={searchEmail}
-                    onChange={(e) => setSearchEmail(e.target.value)}
-                  />
-                  <button className="button-custom-search" onClick={searchUser}><img src={IconLupa}></img></button>
-                </div>
+                <section className="config-space-general">
+                  <div className="config-space-search">
+                    <input
+                      className="outlined-basic"
+                      type="text"
+                      placeholder="Pesquisar por Email"
+                      value={searchEmail}
+                      onChange={(e) => setSearchEmail(e.target.value)}
+                    />
+                    <button className="button-custom-search" onClick={searchUser}><img src={IconLupa}></img></button>
+                  </div>
+                  <div className="config-space-button">
+                    {userFound && (
+                      <button className="custom-button3" onClick={() => {
+                        setSearchEmail("");  // Limpar o campo de pesquisa
+                        setUserFound(false); // Voltar ao estado inicial
+                        setSearchedUser(null);
+                      }}>Limpar Pesquisa</button>
+                    )}</div>
+                </section>
               </TableCell>
-              <TableCell>
-                {userFound && (
-                  <Button onClick={() => {
-                    setSearchEmail("");  // Limpar o campo de pesquisa
-                    setUserFound(false); // Voltar ao estado inicial
-                    setSearchedUser(null);
-                  }}>Limpar Pesquisa</Button>
-                )}</TableCell>
               <TableCell>
                 {selectedUser && ( // Se um usuário for selecionado, exiba o formulário de atualização
                   <div>
@@ -164,8 +164,12 @@ function Config() {
                 )}
               </TableCell>
               <TableCell>
+              </TableCell>
+              <TableCell>
+              </TableCell>
+              <TableCell>
                 {!showCadastro ? (
-                  <button onClick={handleMostrarCadastro}>Mostrar Cadastro</button>
+                  <button className="custom-button3" onClick={handleMostrarCadastro}>Cadastrar Usuário</button>
                 ) : (
                   <Cadastro open={showCadastro} handleClose={handleCancelarCadastro} />
                 )}

@@ -12,31 +12,31 @@ function Ficha() {
           <div className="input-row">
             <label>
               ID da Ficha:{" "}
-              <input className="outlined-basic" type="text" name="id_ficha" />
+              <input className="outlined-basic2" type="text" name="id_ficha" />
             </label>
             <label>
               ID da Mesa:{" "}
-              <input className="outlined-basic" type="text" name="id_mesa" />
+              <input className="outlined-basic2" type="text" name="id_mesa" />
             </label>
           </div>
           <div className="input-row">
             <label>
               Email:{" "}
-              <input className="outlined-basic" type="text" name="email" />
+              <input className="outlined-basic2" type="text" name="email" />
             </label>
             <label>
               ID do Veículo:{" "}
-              <input className="outlined-basic" type="text" name="id_veiculo" />
+              <input className="outlined-basic2" type="text" name="id_veiculo" />
             </label>
           </div>
           <div className="input-row">
             <label>
               Nome:{" "}
-              <input className="outlined-basic" type="text" name="name" />
+              <input className="outlined-basic2" type="text" name="name" />
             </label>
             <label>
               Tipo de Ficha:{" "}
-              <select className="outlined-basic" name="tipo_ficha">
+              <select className="outlined-basic2" name="tipo_ficha">
                 <option value="player">Player</option>
                 <option value="veiculo">Veículo</option>
               </select>
@@ -45,21 +45,21 @@ function Ficha() {
           <div className="input-row">
             <label>
               Arquétipo:{" "}
-              <input className="outlined-basic" type="text" name="arquetipo" />
+              <input className="outlined-basic2" type="text" name="arquetipo" />
             </label>
             <label>
               Poder:{" "}
-              <input className="outlined-basic" type="text" name="poder" />
+              <input className="outlined-basic2" type="text" name="poder" />
             </label>
           </div>
           <div className="input-row">
             <label>
               Habilidade:{" "}
-              <input className="outlined-basic" type="text" name="habilidade" />
+              <input className="outlined-basic2" type="text" name="habilidade" />
             </label>
             <label>
               Resistência:{" "}
-              <input className="outlined-basic" type="text" name="resistencia" />
+              <input className="outlined-basic2" type="text" name="resistencia" />
             </label>
           </div>
           <input type="submit" value="Enviar" />

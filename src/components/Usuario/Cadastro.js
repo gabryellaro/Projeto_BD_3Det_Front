@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import './Config.css';
 
@@ -64,10 +62,12 @@ function Cadastro({ open, handleClose }) {
           p: 4,
           maxWidth: 400,
           width: '80%',
+          height: '300px',
           borderRadius: 4
         }}
       >
         <h2>Preencha as informações do novo usuário</h2>
+        <div>
         <input
           className="outlined-basic-cadas"
           type="text"
@@ -78,9 +78,6 @@ function Cadastro({ open, handleClose }) {
           onChange={(e) => handleInputChange('username', e.target.value)}
         />
         <input
-          InputLabelProps={{
-            style: { fontSize: 13 },
-          }}
           className="outlined-basic-cadas"
           type="text"
           size="small"
@@ -107,8 +104,9 @@ function Cadastro({ open, handleClose }) {
           value={userData.senha}
           onChange={(e) => handleInputChange('senha', e.target.value)}
         />
+        </div>
          {errorMessage && <p>{errorMessage}</p>}
-        <Stack spacing={2} direction="row">
+        <Stack spacing={5} direction="row">
           <button className="custom-button3" onClick={createUser}>
             Cadastrar
           </button>
