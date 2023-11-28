@@ -1,8 +1,6 @@
 .body {
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
     background-color: #f2f2f2;
     font-family: 'Red Rose', cursive;
     border: 2px solid rgb(0, 0, 0);
@@ -65,3 +63,9 @@ input[type="text"], select {
     padding: 4px;
     border: 2px solid rgb(0, 0, 0);
 }
+
+
+ul {
+    overflow-y: scroll;
+    max-height: 400px; /* Altura máxima da lista para exibir uma barra de rolagem */
+  }
