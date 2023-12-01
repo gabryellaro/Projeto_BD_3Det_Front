@@ -69,3 +69,28 @@ ul {
     overflow-y: scroll;
     max-height: 400px; /* Altura máxima da lista para exibir uma barra de rolagem */
   }
+
+.table-config-ficha{
+    font-family: 'Red Rose', serif; 
+}
+
+.css-1ygcj2i-MuiTableCell-root {
+    font-family: 'Red Rose', serif!important;
+    font-weight: 600!important;
+    font-size: 17px!important;
+}
+
+.css-1ex1afd-MuiTableCell-root{
+    font-family: 'Red Rose', serif!important;
+    font-size: 15px!important;
+}
+
+.css-rqglhn-MuiTable-root {
+    border: solid black;
+    min-width: 867.64px;
+}
+
+.css-1ex1afd-MuiTableCell-root{
+    border: 1px solid black!important;
+    padding: 12px;
+}

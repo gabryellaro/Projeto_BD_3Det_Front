@@ -5,13 +5,14 @@ import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
 import './Config.css';
 
-function Cadastro({ open, handleClose }) {
+function Cadastro({ open, handleClose, updateTableData }) {
   const [userData, setUserData] = useState({
     username: '',
     email: '',
     nome: '',
     senha: ''
   });
+
 
   const handleInputChange = (field, value) => {
     setUserData({ ...userData, [field]: value });
@@ -28,6 +29,7 @@ function Cadastro({ open, handleClose }) {
     try {
       const response = await axios.post('http://168.75.100.153:5000/cadastrar_usuario', userData);
       console.log('Usuário cadastrado com sucesso');
+      updateTableData();
     } catch (error) {
       console.error('Erro ao cadastrar o usuário:', error);
     }
