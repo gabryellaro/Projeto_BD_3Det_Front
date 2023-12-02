@@ -1,8 +1,6 @@
 .body {
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
     background-color: #f2f2f2;
     font-family: 'Red Rose', cursive;
     border: 2px solid rgb(0, 0, 0);
@@ -30,8 +28,15 @@ form {
 .input-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-    width: 90%; 
+    flex-direction: column;
+    height: 200px;
+    padding: 30px;
+}
+
+.config-space-ficha{
+    display:flex ;
+    flex-direction: row;
+    justify-content: space-between;
 }
   
 label {
@@ -59,9 +64,68 @@ input[type="text"], select {
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
 }
 
+.config-space-listar{
+    min-width: 900px;
+}
+
+.custom-button4{
+    background-color: blueviolet;
+    padding: 4px;
+    font-size:14px;
+    color: aliceblue;
+    font-family: 'Red Rose', serif!important;
+    border: 2px solid black ;
+    cursor:pointer;
+    margin-left:5px;
+}
+
+.custom-link-ficha{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.custom-main-ficha{
+    font-family: 'Red Rose', serif!important;
+}
+
 .outlined-basic2{
     font-size: 13px;
     font-family: 'Red Rose', serif;
     padding: 4px;
     border: 2px solid rgb(0, 0, 0);
+}
+
+.outlined-basic-ficha{
+    font-size: 14px;
+    font-family: 'Red Rose', serif;
+    width: 170px;
+    padding: 4px;
+    border: 2px solid rgb(0, 0, 0);
+    margin-top: 0px;
+}
+
+.table-config-ficha{
+    font-family: 'Red Rose', serif; 
+}
+
+.css-1ygcj2i-MuiTableCell-root {
+    font-family: 'Red Rose', serif!important;
+    font-weight: 600!important;
+    font-size: 17px!important;
+}
+
+.css-1ex1afd-MuiTableCell-root{
+    font-family: 'Red Rose', serif!important;
+    font-size: 15px!important;
+}
+
+.css-rqglhn-MuiTable-root {
+    border: solid black;
+    min-width: 200px;
+}
+
+.css-1ex1afd-MuiTableCell-root{
+    border: 1px solid black!important;
+    padding: 8px!important;
 }

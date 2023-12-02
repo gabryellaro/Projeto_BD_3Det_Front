@@ -1,38 +1,39 @@
-.custom-button{
+.custom-button {
     background-color: blueviolet;
     padding: 5px;
-    font-size:15px;
+    font-size: 15px;
     color: aliceblue;
-    font-family: 'Red Rose', serif!important;
-    border: 2px solid black ;
+    font-family: 'Red Rose', serif !important;
+    border: 2px solid black;
     border-radius: 2px;
-    cursor:pointer;
+    cursor: pointer;
 
 }
 
-.css-1yhpg23-MuiTableCell-root{
-  font-family: 'Red Rose', serif!important;
-  font-size: 15px;
+.css-1yhpg23-MuiTableCell-root {
+    font-family: 'Red Rose', serif !important;
+    font-size: 15px;
 
 }
 
-.custom-button2{
+.custom-button2 {
     text-decoration: none;
     font-size: 18px;
-    font-family: 'Red Rose', serif!important;
+    font-family: 'Red Rose', serif !important;
     color: black;
     font-weight: 900;
 }
 
-.custom-input{
-    border:2px solid black;
-    padding:5px;
+.custom-input {
+    border: 2px solid black;
+    padding: 5px;
+    font-family: 'Red Rose', serif !important;
 }
 
-.custom-input::placeholder{
-    font-family: 'Red Rose', serif!important;
+.custom-input::placeholder {
+    font-family: 'Red Rose', serif !important;
 }
 
-.custom-title{
-    font-family: 'Red Rose', serif!important;
+.custom-title {
+    font-family: 'Red Rose', serif !important;
 }

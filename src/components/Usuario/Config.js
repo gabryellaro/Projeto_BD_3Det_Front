@@ -65,6 +65,10 @@ function Config() {
     }
   }
 
+  const updateTableData = () => {
+    fetchUsers();
+  };
+
   // Função para atualizar informações do usuário
   const updateUser = async () => {
     const updatedFields = {};
@@ -83,8 +87,11 @@ function Config() {
     }
 
     try {
-      const response = await axios.put(`http://168.75.100.153:5000/atualizar_usuario/${userEmailToUpdate}/${campoToUpdate}`, updatedFields);
+      const response = await axios.put(`http://168.75.100.153:5000/atualizar_usuario/${userEmailToUpdate}`, updatedFields);
       console.log(response.data.message);
+
+      // Após a atualização bem-sucedida, busca novamente os dados do usuário e atualiza a tabela
+      fetchUsers();
     } catch (error) {
       console.error("Erro ao atualizar o usuário:", error);
     }
@@ -111,7 +118,6 @@ function Config() {
 
   return (
     <div className="user-config">
-      {/* <Cadastro /> */}
       <Link className="custom-link" to="/">Voltar</Link>
       <h2>Lista de Usuários</h2>
       <TableContainer component={Paper}>
@@ -171,7 +177,7 @@ function Config() {
                 {!showCadastro ? (
                   <button className="custom-button3" onClick={handleMostrarCadastro}>Cadastrar Usuário</button>
                 ) : (
-                  <Cadastro open={showCadastro} handleClose={handleCancelarCadastro} />
+                  <Cadastro open={showCadastro} handleClose={handleCancelarCadastro} updateTableData={updateTableData} />
                 )}
               </TableCell>
             </TableRow>
