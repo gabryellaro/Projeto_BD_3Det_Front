@@ -4,8 +4,6 @@ import './Ficha.css';
 
 const CadastroFicha = () => {
     const [formData, setFormData] = useState({
-        id_ficha:"",
-        id_veiculo:"",
         nome: "",
         tipo_ficha: "",
         id_mesa: "",
@@ -21,17 +19,6 @@ const CadastroFicha = () => {
 
     const handleInputChange = (field, value) => {
         setFormData({ ...formData, [field]: value });
-    };
-
-    const atualizarFicha = async (id_ficha, dataToUpdate) => {
-        try {
-            const response = await axios.put(`http://168.75.100.153:5000/atualizar_ficha/${id_ficha}`, dataToUpdate);
-            console.log(`Ficha com ID ${id_ficha} atualizada com sucesso:`, response.data);
-            return response.data;
-        } catch (error) {
-            console.error(`Erro ao atualizar a ficha com ID ${id_ficha}:`, error);
-            throw error;
-        }
     };
 
     const cadastrarFicha = async () => {
@@ -95,12 +82,6 @@ const CadastroFicha = () => {
                                 <option type="text" value="Player">Player</option>
                                 <option type="text" value="Veiculo">Veículo</option>
                             </select>
-                            {/* Tipo Ficha:
-                            <input
-                                className="outlined-basic2"
-                                type="text"
-                                name="tipo_ficha"
-                                onChange={(e) => handleInputChange('tipo_ficha', e.target.value)} /> */}
                         </label>
                     </div>
                     <div className="input-row">

@@ -1,77 +1,119 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Ficha.css';
+import { Button } from '@mui/material';
+import Box from '@mui/material/Box';
 
-const AtualizarFicha = () => {
-    const [formData, setFormData] = useState({
-        id_ficha: '',
-        nome: '',
-        arquetipo: '',
-        poder: '',
-        habilidade: '',
-        resistencia: '',
-        tipo_ficha: '',
-        email_usuario: '',
-        id_mesa: '',
-        id_veiculo: '',
-        xp: ''
-    });
-
-    const [errorMessage, setErrorMessage] = useState('');
-
-    const handleInputChange = (field, value) => {
-        setFormData({ ...formData, [field]: value });
-    };
+const AtualizarFicha = ({ ficha, handleUpdate }) => {
+    const [selectedFicha, setSelectedFicha] = useState(ficha); // Inicializa com a ficha passada por propriedade
+    const [isEditing, setIsEditing] = useState(false); // Inicializa como falso, se necessário
 
     const atualizarFicha = async () => {
-        if (!formData.id_ficha) {
-            setErrorMessage('Informe o ID da ficha a ser atualizada');
-            return;
-        }
+        if (!selectedFicha) return;
+
         try {
-            await axios.put(`http://168.75.100.153:5000/atualizar_ficha/${formData.id_ficha}`, formData);
-            console.log(`Ficha com ID ${formData.id_ficha} atualizada com sucesso`);
-            // Lógica para redirecionar ou exibir mensagem de sucesso
+            await axios.put(`http://168.75.100.153:5000/atualizar_ficha/${selectedFicha.id_ficha}`, selectedFicha);
+            console.log(`Ficha com ID ${selectedFicha.id_ficha} atualizada com sucesso`);
+            handleUpdate(); // Chama a função de atualização fornecida pelo componente pai
+            setSelectedFicha(null);
         } catch (error) {
             console.error('Erro ao atualizar a ficha:', error);
-            // Lógica para exibir mensagem de erro
         }
     };
 
-    return (
-        <div className="body">
-            <div className="container">
-                <h1>ATUALIZAR FICHA</h1>
-                <form>
-                    <div className="input-row">
-                        <label>
-                            ID da Ficha:
-                            <input
-                                className="outlined-basic2"
-                                type="text"
-                                name="id_ficha"
-                                onChange={(e) => handleInputChange('id_ficha', e.target.value)} />
-                        </label>
-                    </div>
-                    {/* Adicione aqui os demais inputs correspondentes aos campos da ficha */}
-                    {/* Exemplo: */}
-                    <div className="input-row">
-                        <label>
-                            Nome:
-                            <input
-                                className="outlined-basic2"
-                                type="text"
-                                name="nome"
-                                onChange={(e) => handleInputChange('nome', e.target.value)} />
-                        </label>
-                    </div>
-                    {/* Repita para outros campos que deseja atualizar */}
-                    {/* ... */}
+    useEffect(() => {
+        setSelectedFicha(ficha);
+        setIsEditing(true);
+    }, [ficha]);
 
-                </form>
-                <button className="button-custom-enviar" onClick={atualizarFicha}>Atualizar Ficha</button>
-                {errorMessage && <p>{errorMessage}</p>}
+    return (
+        <div className="form-edit">
+            <Box className="box-config"
+                sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                    maxWidth: 400,
+                    width: '80%',
+                    height: '300px',
+                    borderRadius: 4
+                }}
+            >
+            <div className="form-edit">
+                <h2>Editar Ficha</h2>
+                <label>ID da Ficha:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.id_ficha}
+                    disabled
+                />
+                <label>Nome:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.nome}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, nome: e.target.value })}
+                />
+                <label>Tipo_Ficha:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.tipo_ficha}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, tipo_ficha: e.target.value })}
+                />
+                <label>Poder:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.poder}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, poder: e.target.value })}
+                />
+                <label>Habilidade:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.habilidade}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, habilidade: e.target.value })}
+                />
+                <label>Arquétipo:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.arquetipo}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, arquetipo: e.target.value })}
+                />
+                <label>Resistência:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.resistencia}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, resistencia: e.target.value })}
+                />
+                <label>XP:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.xp}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, xp: e.target.value })}
+                />
+                <label>Email:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.email_usuario}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, email_usuario: e.target.value })}
+                />
+                <label>Id_Mesa:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.id_mesa}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, id_mesa: e.target.value })}
+                />
+                <label>Id_Veiculo:</label>
+                <input
+                    type="text"
+                    value={selectedFicha.id_veiculo}
+                    onChange={(e) => setSelectedFicha({ ...selectedFicha, id_veiculo: e.target.value })}
+                />
+                <Button onClick={atualizarFicha}>Salvar</Button>
+                <Button onClick={() => setIsEditing(false)}>Cancelar</Button>
             </div>
+            </Box>
         </div>
     );
 };
