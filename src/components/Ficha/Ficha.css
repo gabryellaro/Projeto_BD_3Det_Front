@@ -96,6 +96,15 @@ input[type="text"], select {
     border: 2px solid rgb(0, 0, 0);
 }
 
+.outlined-basic-ficha{
+    font-size: 14px;
+    font-family: 'Red Rose', serif;
+    width: 170px;
+    padding: 4px;
+    border: 2px solid rgb(0, 0, 0);
+    margin-top: 0px;
+}
+
 .table-config-ficha{
     font-family: 'Red Rose', serif; 
 }
@@ -113,7 +122,7 @@ input[type="text"], select {
 
 .css-rqglhn-MuiTable-root {
     border: solid black;
-    min-width: 900px;
+    min-width: 200px;
 }
 
 .css-1ex1afd-MuiTableCell-root{

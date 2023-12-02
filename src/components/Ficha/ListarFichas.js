@@ -18,14 +18,13 @@ import CadastroPericia from './Cadastros/CadastroPericia';
 import Modal from '@mui/material/Modal';
 import AtualizarFicha from './AtualizarFicha';
 import CadastroItem from './Cadastros/Cadastrar itemMenu';
+import IconLupa from "../../assets/lupa.svg"
+import PesquisaFicha from './PesquisarFicha';
+import AtualizarItem from './Atualizar e Excluir/AtualizarItem';
 
 const ListarFicha = () => {
   const [fichas, setFichas] = useState([]);
   const [erro, setErro] = useState(null);
-  const [formData, setFormData] = useState({
-    id_ficha: '',
-    nome: '',
-  });
 
   const useModal = (initialState = false) => {
     const [showModal, setShowModal] = useState(initialState);
@@ -80,6 +79,12 @@ const ListarFicha = () => {
     handleCloseModal: handleCloseItemModal
   } = useModal();
 
+  const {
+    showModal: showAtualizarItemModal,
+    handleOpenModal: handleOpenAtualizarItemModal,
+    handleCloseModal: handleCloseAtualizarItemModal
+  } = useModal();
+
   const deletarFicha = async (id_ficha) => {
     try {
       await axios.delete(`http://168.75.100.153:5000/excluir_ficha/${id_ficha}`);
@@ -114,37 +119,46 @@ const ListarFicha = () => {
       <TableContainer component={Paper}>
         <Table className="table-config-ficha">
           <TableHead>
-          <TableRow>
+            <TableRow>
               <TableCell>
                 <button className="custom-button4" onClick={handleOpenCadastrarModal}>Cadastrar</button>
                 <Modal open={showCadastrarModal} onClose={handleCloseCadastrarModal}>
                   <CadastroFicha onClose={handleCloseCadastrarModal} updateTableData={updateTableData} />
                 </Modal>
               </TableCell>
-            <TableCell>
-              <button className="custom-button4" onClick={handleOpenAdicionarVantagemModal}>Adicionar Vantagem</button>
-              <Modal open={showAdicionarVantagemModal} onClose={handleCloseAdicionarVantagemModal}>
-                <CadastroVantagem onClose={handleCloseAdicionarVantagemModal} updateTableData={updateTableData} />
-              </Modal>
-            </TableCell>
-            <TableCell>
-              <button className="custom-button4" onClick={handleOpenAdicionarDesvantagemModal}>Adicionar Desvantagem</button>
-              <Modal open={showAdicionarDesvantagemModal} onClose={handleCloseAdicionarDesvantagemModal}>
-                <CadastroDesvantagem onClose={handleCloseAdicionarDesvantagemModal} updateTableData={updateTableData} />
-              </Modal>
-            </TableCell>
-            <TableCell>
-              <button className="custom-button4" onClick={handleOpenPericiaModal}>Adicionar Pericia</button>
-              <Modal open={showPericiaModal} onClose={handleClosePericiaModal}>
-                <CadastroPericia onClose={handleClosePericiaModal} updateTableData={updateTableData} />
-              </Modal>
-            </TableCell>
-            <TableCell>
-              <button className="custom-button4" onClick={handleOpenItemModal}>Adicionar Item</button>
-              <Modal open={showItemModal} onClose={handleCloseItemModal}>
-                <CadastroItem onClose={handleCloseItemModal} updateTableData={updateTableData} />
-              </Modal>
-            </TableCell>
+              <TableCell>
+                <button className="custom-button4" onClick={handleOpenAdicionarVantagemModal}>Adicionar Vantagem</button>
+                <Modal open={showAdicionarVantagemModal} onClose={handleCloseAdicionarVantagemModal}>
+                  <CadastroVantagem onClose={handleCloseAdicionarVantagemModal} updateTableData={updateTableData} />
+                </Modal>
+              </TableCell>
+              <TableCell>
+                <button className="custom-button4" onClick={handleOpenAdicionarDesvantagemModal}>Adicionar Desvantagem</button>
+                <Modal open={showAdicionarDesvantagemModal} onClose={handleCloseAdicionarDesvantagemModal}>
+                  <CadastroDesvantagem onClose={handleCloseAdicionarDesvantagemModal} updateTableData={updateTableData} />
+                </Modal>
+              </TableCell>
+              <TableCell>
+                <button className="custom-button4" onClick={handleOpenPericiaModal}>Adicionar Pericia</button>
+                <Modal open={showPericiaModal} onClose={handleClosePericiaModal}>
+                  <CadastroPericia onClose={handleClosePericiaModal} updateTableData={updateTableData} />
+                </Modal>
+              </TableCell>
+              <TableCell>
+                <button className="custom-button4" onClick={handleOpenItemModal}>Adicionar Item</button>
+                <Modal open={showItemModal} onClose={handleCloseItemModal}>
+                  <CadastroItem onClose={handleCloseItemModal} updateTableData={updateTableData} />
+                </Modal>
+              </TableCell>
+              <TableCell>
+              <button className="custom-button4" onClick={handleOpenAtualizarItemModal}>Atualizar Item</button>
+                <Modal open={showAtualizarItemModal} onClose={handleCloseAtualizarItemModal}>
+                  <AtualizarItem onClose={handleCloseAtualizarItemModal} />
+                </Modal>
+              </TableCell>
+              <TableCell>
+                <PesquisaFicha/>
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>XP(qtd)</TableCell>
@@ -200,8 +214,8 @@ const ListarFicha = () => {
                   <Button onClick={handleOpenAtualizarModal}><img src={IconEdit} alt="Atualizar"></img></Button>
                 </TableCell>
                 <Modal open={showAtualizarModal} onClose={handleCloseAtualizarModal}>
-                    <AtualizarFicha ficha={ficha} handleUpdate={fetchData} onClose={handleCloseAtualizarModal} />
-                  </Modal>
+                  <AtualizarFicha ficha={ficha} handleUpdate={fetchData} onClose={handleCloseAtualizarModal} />
+                </Modal>
               </TableRow>
             ))}
           </TableBody>

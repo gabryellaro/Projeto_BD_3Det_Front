@@ -22,14 +22,25 @@ const CadastroFicha = ({ updateTableData }) => {
     const handleInputChange = (field, value) => {
         setFormData({ ...formData, [field]: value });
     };
-
     const cadastrarFicha = async () => {
         if (!(formData.nome && formData.id_mesa && formData.email_usuario)) {
             setErrorMessage('Preencha todos os campos obrigatórios');
             return;
         }
         try {
-            const response = await axios.post('http://168.75.100.153:5000/cadastrar_ficha', formData);
+            const formDataToSend = {
+                nome: formData.nome,
+                tipo_ficha: formData.tipo_ficha,
+                id_mesa: formData.id_mesa,
+                arquetipo: formData.arquetipo,
+                poder: formData.poder,
+                habilidade: formData.habilidade,
+                resistencia: formData.resistencia,
+                email_usuario: formData.email_usuario,
+                xp: parseInt(formData.xp), // Garanta que a XP seja um número
+            };
+            console.log(formDataToSend);
+            const response = await axios.post('http://168.75.100.153:5000/cadastrar_ficha', formDataToSend);
             console.log('Resposta da API:', response.data);
             console.log('Ficha cadastrada com sucesso');
             updateTableData();
@@ -39,6 +50,7 @@ const CadastroFicha = ({ updateTableData }) => {
             // Lógica para exibir mensagem de erro
         }
     };
+
 
     return (
         <div className="body">
@@ -57,77 +69,76 @@ const CadastroFicha = ({ updateTableData }) => {
                     borderRadius: 4
                 }}
             >
-                
+
                 <h1>Cadastrar Ficha</h1>
                 <div className='config-space-ficha'>
-                <div className='input-row'>
-                <input
-                    className="outlined-basic2"
-                    type="text"
-                    name="id_mesa"
-                    placeholder='ID da Mesa'
-                    onChange={(e) => handleInputChange('id_mesa', e.target.value)} />
-                <input
-                    className="outlined-basic2"
-                    type="text"
-                    name="email_usuario"
-                    placeholder='Email:'
-                    onChange={(e) => handleInputChange('email_usuario', e.target.value)} />
-                <input
-                    className="outlined-basic2"
-                    type="text"
-                    name="nome"
-                    placeholder='Nome:'
-                    onChange={(e) => handleInputChange('nome', e.target.value)} />
+                    <div className='input-row'>
+                        <input
+                            className="outlined-basic2"
+                            type="text"
+                            name="id_mesa"
+                            placeholder='ID da Mesa'
+                            onChange={(e) => handleInputChange('id_mesa', e.target.value)} />
+                        <input
+                            className="outlined-basic2"
+                            type="text"
+                            name="email_usuario"
+                            placeholder='Email:'
+                            onChange={(e) => handleInputChange('email_usuario', e.target.value)} />
+                        <input
+                            className="outlined-basic2"
+                            type="text"
+                            name="nome"
+                            placeholder='Nome:'
+                            onChange={(e) => handleInputChange('nome', e.target.value)} />
+                        <select
+                            className="outlined-basic2"
+                            name="tipo_ficha"
+                            type="text"
+                            onChange={(e) => handleInputChange('tipo_ficha', e.target.value)}
+                            value={formData.tipo_ficha} // Use o valor do estado para controlar a seleção
+                        >
+                            <option value="">
+                                Tipo Ficha
+                            </option>
+                            <option value="Player">Player</option>
+                            <option value="Veiculo">Veículo</option>
+                        </select>
+                    </div>
+                    <div className='input-row'>
+                        <input
+                            className="outlined-basic2"
+                            type="text"
+                            name="arquetipo"
+                            placeholder='Arquétipo:'
+                            onChange={(e) => handleInputChange('arquetipo', e.target.value)} />
+                        <input
+                            className="outlined-basic2"
+                            type="number"
+                            name="poder"
+                            placeholder='Poder:'
+                            onChange={(e) => handleInputChange('poder', e.target.value)} />
+                        <input
+                            className="outlined-basic2"
+                            type="number"
+                            name="habilidade"
+                            placeholder='Habilidade:'
+                            onChange={(e) => handleInputChange('habilidade', e.target.value)} />
 
-                <select
-                    className="outlined-basic2"
-                    name="tipo_ficha"
-                    type="text"
-                    onChange={(e) => handleInputChange('tipo_ficha', e.target.value)}
-                    defaultValue="Player"
-                >
-                    <option value="" >
-                        Tipo Ficha
-                    </option>
-                    <option value="Player">Player</option>
-                    <option value="Veiculo">Veículo</option>
-                </select>
+                        <input
+                            className="outlined-basic2"
+                            type="number"
+                            name="resistencia"
+                            placeholder='Resistência:'
+                            onChange={(e) => handleInputChange('resistencia', e.target.value)} />
+                        <input
+                            className="outlined-basic2"
+                            type="number"
+                            name="xp"
+                            placeholder='XP:'
+                            onChange={(e) => handleInputChange('xp', e.target.value)} />
+                    </div>
                 </div>
-                <div  className='input-row'>
-                <input
-                    className="outlined-basic2"
-                    type="text"
-                    name="arquetipo"
-                    placeholder='Arquétipo:'
-                    onChange={(e) => handleInputChange('arquetipo', e.target.value)} />
-                <input
-                    className="outlined-basic2"
-                    type="number"
-                    name="poder"
-                    placeholder='Poder:'
-                    onChange={(e) => handleInputChange('poder', e.target.value)} />
-                <input
-                    className="outlined-basic2"
-                    type="number"
-                    name="habilidade"
-                    placeholder='Habilidade:'
-                    onChange={(e) => handleInputChange('habilidade', e.target.value)} />
-
-                <input
-                    className="outlined-basic2"
-                    type="number"
-                    name="resistencia"
-                    placeholder='Resistência:'
-                    onChange={(e) => handleInputChange('resistencia', e.target.value)} />
-                <input
-                    className="outlined-basic2"
-                    type="number"
-                    name="xp"
-                    placeholder='XP:'
-                    onChange={(e) => handleInputChange('xp', e.target.value)} />
-                    </div>
-                    </div>
                 <button className="button-custom-enviar" onClick={cadastrarFicha}>Cadastrar Ficha</button>
                 {errorMessage && <p>{errorMessage}</p>}
             </Box>
