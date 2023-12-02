@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import './Ficha.css';
+import '../Ficha.css';
 
 function CadastroVantagem({updateTableData}) {
     const [formData, setFormData] = useState({

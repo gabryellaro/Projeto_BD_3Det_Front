@@ -11,12 +11,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import IconDelete from '../../assets/lixo.svg'
 import IconEdit from '../../assets/atualizar.svg'
-import CadastroFicha from './CadastroFicha';
-import CadastroDesvantagem from './CadastroDesvantagem';
-import CadastroVantagem from './CadastroVantagem';
-import CadastroPericia from './CadastroPericia';
+import CadastroFicha from './Cadastros/CadastroFicha';
+import CadastroDesvantagem from './Cadastros/CadastroDesvantagem';
+import CadastroVantagem from './Cadastros/CadastroVantagem';
+import CadastroPericia from './Cadastros/CadastroPericia';
 import Modal from '@mui/material/Modal';
 import AtualizarFicha from './AtualizarFicha';
+import CadastroItem from './Cadastros/Cadastrar itemMenu';
 
 const ListarFicha = () => {
   const [fichas, setFichas] = useState([]);
@@ -71,6 +72,12 @@ const ListarFicha = () => {
     showModal: showPericiaModal,
     handleOpenModal: handleOpenPericiaModal,
     handleCloseModal: handleClosePericiaModal
+  } = useModal();
+
+  const {
+    showModal: showItemModal,
+    handleOpenModal: handleOpenItemModal,
+    handleCloseModal: handleCloseItemModal
   } = useModal();
 
   const deletarFicha = async (id_ficha) => {
@@ -132,9 +139,15 @@ const ListarFicha = () => {
                 <CadastroPericia onClose={handleClosePericiaModal} updateTableData={updateTableData} />
               </Modal>
             </TableCell>
+            <TableCell>
+              <button className="custom-button4" onClick={handleOpenItemModal}>Adicionar Item</button>
+              <Modal open={showItemModal} onClose={handleCloseItemModal}>
+                <CadastroItem onClose={handleCloseItemModal} updateTableData={updateTableData} />
+              </Modal>
+            </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>ID da Ficha</TableCell>
+              <TableCell>XP(qtd)</TableCell>
               <TableCell>Nome</TableCell>
               <TableCell>Tipo Ficha</TableCell>
               <TableCell>Vantagens</TableCell>
@@ -146,7 +159,7 @@ const ListarFicha = () => {
           <TableBody>
             {fichas.map((ficha) => (
               <TableRow key={ficha.id_ficha}>
-                <TableCell>{ficha.id_ficha}</TableCell>
+                <TableCell>{ficha.xp}</TableCell>
                 <TableCell>{ficha.nome}</TableCell>
                 <TableCell>{ficha.tipo_ficha}</TableCell>
                 <TableCell>
