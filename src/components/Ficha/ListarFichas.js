@@ -161,6 +161,7 @@ const ListarFicha = () => {
               </TableCell>
             </TableRow>
             <TableRow>
+              <TableCell>ID Ficha</TableCell>
               <TableCell>XP(qtd)</TableCell>
               <TableCell>Nome</TableCell>
               <TableCell>Tipo Ficha</TableCell>
@@ -173,6 +174,7 @@ const ListarFicha = () => {
           <TableBody>
             {fichas.map((ficha) => (
               <TableRow key={ficha.id_ficha}>
+                <TableCell>{ficha.id_ficha}</TableCell>
                 <TableCell>{ficha.xp}</TableCell>
                 <TableCell>{ficha.nome}</TableCell>
                 <TableCell>{ficha.tipo_ficha}</TableCell>
