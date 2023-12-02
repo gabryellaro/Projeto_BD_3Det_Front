@@ -11,8 +11,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import IconDelete from '../../assets/lixo.svg'
 import IconEdit from '../../assets/atualizar.svg'
+import CadastroFicha from './CadastroFicha';
 import CadastroDesvantagem from './CadastroDesvantagem';
 import CadastroVantagem from './CadastroVantagem';
+import CadastroPericia from './CadastroPericia';
 import Modal from '@mui/material/Modal';
 import AtualizarFicha from './AtualizarFicha';
 
@@ -59,12 +61,17 @@ const ListarFicha = () => {
     handleCloseModal: handleCloseAtualizarModal
   } = useModal();
 
-  const handleInputChange = (field, value) => {
-    setFormData({ ...formData, [field]: value });
-  };
+  const {
+    showModal: showCadastrarModal,
+    handleOpenModal: handleOpenCadastrarModal,
+    handleCloseModal: handleCloseCadastrarModal
+  } = useModal();
 
-  const [errorMessage, setErrorMessage] = useState('');
-
+  const {
+    showModal: showPericiaModal,
+    handleOpenModal: handleOpenPericiaModal,
+    handleCloseModal: handleClosePericiaModal
+  } = useModal();
 
   const deletarFicha = async (id_ficha) => {
     try {
@@ -76,27 +83,8 @@ const ListarFicha = () => {
     }
   };
 
-  const [selectedFicha, setSelectedFicha] = useState(null);
-
   const updateTableData = () => {
     fetchData();
-  };
-
-  const [isEditing, setIsEditing] = useState(false);
-
-  // Função para atualizar a ficha
-  const atualizarFicha = async () => {
-    if (!selectedFicha) return;
-
-    try {
-      await axios.put(`http://168.75.100.153:5000/atualizar_ficha/${selectedFicha.id_ficha}`, selectedFicha);
-      console.log(`Ficha com ID ${selectedFicha.id_ficha} atualizada com sucesso`);
-      setSelectedFicha(null);
-      // Lógica para atualizar a lista de fichas após a edição
-      // Recarregue a lista de fichas ou faça uma nova requisição para atualizar a lista
-    } catch (error) {
-      console.error('Erro ao atualizar a ficha:', error);
-    }
   };
 
   const fetchData = async () => {
@@ -112,7 +100,6 @@ const ListarFicha = () => {
     fetchData();
   }, []);
 
-
   return (
     <div className='config-space-listar'>
       <h1>Listagem de Fichas</h1>
@@ -120,22 +107,40 @@ const ListarFicha = () => {
       <TableContainer component={Paper}>
         <Table className="table-config-ficha">
           <TableHead>
+          <TableRow>
+              <TableCell>
+                <button className="custom-button4" onClick={handleOpenCadastrarModal}>Cadastrar</button>
+                <Modal open={showCadastrarModal} onClose={handleCloseCadastrarModal}>
+                  <CadastroFicha onClose={handleCloseCadastrarModal} updateTableData={updateTableData} />
+                </Modal>
+              </TableCell>
+            <TableCell>
+              <button className="custom-button4" onClick={handleOpenAdicionarVantagemModal}>Adicionar Vantagem</button>
+              <Modal open={showAdicionarVantagemModal} onClose={handleCloseAdicionarVantagemModal}>
+                <CadastroVantagem onClose={handleCloseAdicionarVantagemModal} updateTableData={updateTableData} />
+              </Modal>
+            </TableCell>
+            <TableCell>
+              <button className="custom-button4" onClick={handleOpenAdicionarDesvantagemModal}>Adicionar Desvantagem</button>
+              <Modal open={showAdicionarDesvantagemModal} onClose={handleCloseAdicionarDesvantagemModal}>
+                <CadastroDesvantagem onClose={handleCloseAdicionarDesvantagemModal} updateTableData={updateTableData} />
+              </Modal>
+            </TableCell>
+            <TableCell>
+              <button className="custom-button4" onClick={handleOpenPericiaModal}>Adicionar Pericia</button>
+              <Modal open={showPericiaModal} onClose={handleClosePericiaModal}>
+                <CadastroPericia onClose={handleClosePericiaModal} updateTableData={updateTableData} />
+              </Modal>
+            </TableCell>
+            </TableRow>
             <TableRow>
               <TableCell>ID da Ficha</TableCell>
               <TableCell>Nome</TableCell>
               <TableCell>Tipo Ficha</TableCell>
-              <TableCell> <Button onClick={handleOpenAdicionarVantagemModal}>Adicionar Vantagem</Button>
-                <Modal open={showAdicionarVantagemModal} onClose={handleCloseAdicionarVantagemModal}>
-                  <CadastroVantagem onClose={handleCloseAdicionarVantagemModal} updateTableData={updateTableData} />
-                </Modal>
-              </TableCell>
-              <TableCell>
-                <Button onClick={handleOpenAdicionarDesvantagemModal}>Adicionar Desvantagem</Button>
-                <Modal open={showAdicionarDesvantagemModal} onClose={handleCloseAdicionarDesvantagemModal}>
-                  <CadastroDesvantagem onClose={handleCloseAdicionarDesvantagemModal} updateTableData={updateTableData} />
-                </Modal>
-              </TableCell>
-
+              <TableCell>Vantagens</TableCell>
+              <TableCell>Desvantagens</TableCell>
+              <TableCell>Pericias</TableCell>
+              <TableCell align="center">Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -145,9 +150,8 @@ const ListarFicha = () => {
                 <TableCell>{ficha.nome}</TableCell>
                 <TableCell>{ficha.tipo_ficha}</TableCell>
                 <TableCell>
-                  <div style={{ maxHeight: '70px', overflowY: 'auto' }}>
-                    <h4>Vantagens</h4>
-                    <ul style={{ listStyle: 'none', padding: 0, overflowY: 'hidden'}}>
+                  <div style={{ maxHeight: '50px', overflowY: 'auto' }}>
+                    <ul style={{ listStyle: 'none', padding: 0, overflowY: 'hidden' }}>
                       {ficha.vantagens.map((vantagem, index) => (
                         <li key={`vantagem_${ficha.id_ficha}_${index}`}>
                           {vantagem.nome_vant}
@@ -155,10 +159,10 @@ const ListarFicha = () => {
                       ))}
                     </ul>
                   </div>
-
-                  <div style={{ maxHeight: '70px', overflowY: 'auto' }}>
-                    <h4>Desvantagens</h4>
-                    <ul style={{ listStyle: 'none', padding: 0, overflowY: 'hidden'}}>
+                </TableCell>
+                <TableCell>
+                  <div style={{ maxHeight: '50px', overflowY: 'auto' }}>
+                    <ul style={{ listStyle: 'none', padding: 0, overflowY: 'hidden' }}>
                       {ficha.desvantagens.map((desvantagem, index) => (
                         <li key={`desvantagem_${ficha.id_ficha}_${index}`}>
                           {desvantagem.nome_desvant}
@@ -168,92 +172,28 @@ const ListarFicha = () => {
                   </div>
                 </TableCell>
                 <TableCell>
+                  <div style={{ maxHeight: '50px', overflowY: 'auto' }}>
+                    <ul style={{ listStyle: 'none', padding: 0, overflowY: 'hidden' }}>
+                      {ficha.pericias.map((pericias, index) => (
+                        <li key={`pericias_${ficha.id_ficha}_${index}`}>
+                          {pericias.nome_pericia}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </TableCell>
+                <TableCell>
                   <Button onClick={() => deletarFicha(ficha.id_ficha)}><img src={IconDelete} alt="Deletar"></img></Button>
                   <Button onClick={handleOpenAtualizarModal}><img src={IconEdit} alt="Atualizar"></img></Button>
-                  <Modal open={showAtualizarModal} onClose={handleCloseAtualizarModal}>
+                </TableCell>
+                <Modal open={showAtualizarModal} onClose={handleCloseAtualizarModal}>
                     <AtualizarFicha ficha={ficha} handleUpdate={fetchData} onClose={handleCloseAtualizarModal} />
                   </Modal>
-                </TableCell>
               </TableRow>
             ))}
-
           </TableBody>
         </Table>
       </TableContainer>
-
-      {isEditing && selectedFicha && (
-        <div className="form-edit">
-          <h2>Editar Ficha</h2>
-          <label>ID da Ficha:</label>
-          <input
-            type="text"
-            value={selectedFicha.id_ficha}
-            disabled
-          />
-          <label>Nome:</label>
-          <input
-            type="text"
-            value={selectedFicha.nome}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, nome: e.target.value })}
-          />
-          <label>Tipo_Ficha:</label>
-          <input
-            type="text"
-            value={selectedFicha.tipo_ficha}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, tipo_ficha: e.target.value })}
-          />
-          <label>Poder:</label>
-          <input
-            type="text"
-            value={selectedFicha.poder}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, poder: e.target.value })}
-          />
-          <label>Habilidade:</label>
-          <input
-            type="text"
-            value={selectedFicha.habilidade}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, habilidade: e.target.value })}
-          />
-          <label>Arquétipo:</label>
-          <input
-            type="text"
-            value={selectedFicha.arquetipo}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, arquetipo: e.target.value })}
-          />
-          <label>Resistência:</label>
-          <input
-            type="text"
-            value={selectedFicha.resistencia}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, resistencia: e.target.value })}
-          />
-          <label>XP:</label>
-          <input
-            type="text"
-            value={selectedFicha.xp}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, xp: e.target.value })}
-          />
-          <label>Email:</label>
-          <input
-            type="text"
-            value={selectedFicha.email_usuario}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, email_usuario: e.target.value })}
-          />
-          <label>Id_Mesa:</label>
-          <input
-            type="text"
-            value={selectedFicha.id_mesa}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, id_mesa: e.target.value })}
-          />
-          <label>Id_Veiculo:</label>
-          <input
-            type="text"
-            value={selectedFicha.id_veiculo}
-            onChange={(e) => setSelectedFicha({ ...selectedFicha, id_veiculo: e.target.value })}
-          />
-          <Button onClick={atualizarFicha}>Salvar</Button>
-          <Button onClick={() => setIsEditing(false)}>Cancelar</Button>
-        </div>
-      )}
     </div>
   );
 };

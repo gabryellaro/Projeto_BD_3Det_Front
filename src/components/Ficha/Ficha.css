@@ -57,18 +57,37 @@ input[type="text"], select {
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
 }
 
+.config-space-listar{
+    min-width: 900px;
+}
+
+.custom-button4{
+    background-color: blueviolet;
+    padding: 4px;
+    font-size:14px;
+    color: aliceblue;
+    font-family: 'Red Rose', serif!important;
+    border: 2px solid black ;
+    cursor:pointer;
+    margin-left:5px;
+}
+
+.custom-link-ficha{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.custom-main-ficha{
+    font-family: 'Red Rose', serif!important;
+}
+
 .outlined-basic2{
     font-size: 13px;
     font-family: 'Red Rose', serif;
     padding: 4px;
     border: 2px solid rgb(0, 0, 0);
 }
-
-
-ul {
-    overflow-y: scroll;
-    max-height: 400px; /* Altura máxima da lista para exibir uma barra de rolagem */
-  }
 
 .table-config-ficha{
     font-family: 'Red Rose', serif; 
@@ -87,10 +106,10 @@ ul {
 
 .css-rqglhn-MuiTable-root {
     border: solid black;
-    min-width: 867.64px;
+    min-width: 900px;
 }
 
 .css-1ex1afd-MuiTableCell-root{
     border: 1px solid black!important;
-    padding: 12px;
+    padding: 8px!important;
 }

@@ -9,13 +9,9 @@ import CadastroPericia from './CadastroPericia';
 
 function Ficha() {
   return (
-    <main>    
+    <main className='custom-main-ficha'>    
+      <Link className="custom-link-ficha" to="/">Voltar</Link>
       <ListarFicha/>
-      {/* <CadastroFicha/>  */}
-      {/* <CadastroVantagem/>
-      <CadastroDesvantagem/>
-      <CadastroPericia></CadastroPericia> */}
-      <p>Esta é a página da Ficha. <Link to="/">Voltar para a Home</Link></p>
     </main>
   );
 }

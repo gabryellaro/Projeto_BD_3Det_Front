@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
 import './Ficha.css';
 
-function CadastroPericia({ open, handleClose }) {
+function CadastroPericia({ updateTableData }) {
   const [formData, setFormData] = useState({
     id_ficha: '',
     nome: '',
@@ -26,13 +26,13 @@ function CadastroPericia({ open, handleClose }) {
     try {
       const response = await axios.post('http://168.75.100.153:5000/cadastrar_ficha/pericia', formData);
       console.log('Pericia cadastrada com sucesso');
+      updateTableData();
     } catch (error) {
       console.error('Erro ao cadastrar a Pericia:', error);
     }
   };
 
   return (
-    // <Modal open={open} onClose={handleClose}>
       <Box className="box-config"
         sx={{
           position: 'absolute',
@@ -76,7 +76,6 @@ function CadastroPericia({ open, handleClose }) {
           </button>
         </Stack>
       </Box>
-    // </Modal>
   );
 }
 

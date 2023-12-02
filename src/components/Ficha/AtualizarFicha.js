@@ -4,17 +4,18 @@ import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 
 const AtualizarFicha = ({ ficha, handleUpdate }) => {
-    const [selectedFicha, setSelectedFicha] = useState(ficha); // Inicializa com a ficha passada por propriedade
-    const [isEditing, setIsEditing] = useState(false); // Inicializa como falso, se necessário
+    const [selectedFicha, setSelectedFicha] = useState({ficha });  // Inicializa com a ficha passada por propriedade
 
     const atualizarFicha = async () => {
-        if (!selectedFicha) return;
-
+        if (!selectedFicha) {
+            console.error('Ficha não está definida');
+            return;
+          }
+        
         try {
             await axios.put(`http://168.75.100.153:5000/atualizar_ficha/${selectedFicha.id_ficha}`, selectedFicha);
             console.log(`Ficha com ID ${selectedFicha.id_ficha} atualizada com sucesso`);
             handleUpdate(); // Chama a função de atualização fornecida pelo componente pai
-            setSelectedFicha(null);
         } catch (error) {
             console.error('Erro ao atualizar a ficha:', error);
         }
@@ -22,7 +23,6 @@ const AtualizarFicha = ({ ficha, handleUpdate }) => {
 
     useEffect(() => {
         setSelectedFicha(ficha);
-        setIsEditing(true);
     }, [ficha]);
 
     return (
@@ -111,7 +111,6 @@ const AtualizarFicha = ({ ficha, handleUpdate }) => {
                     onChange={(e) => setSelectedFicha({ ...selectedFicha, id_veiculo: e.target.value })}
                 />
                 <Button onClick={atualizarFicha}>Salvar</Button>
-                <Button onClick={() => setIsEditing(false)}>Cancelar</Button>
             </div>
             </Box>
         </div>

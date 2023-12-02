@@ -118,7 +118,6 @@ function Config() {
 
   return (
     <div className="user-config">
-      {/* <Cadastro /> */}
       <Link className="custom-link" to="/">Voltar</Link>
       <h2>Lista de Usuários</h2>
       <TableContainer component={Paper}>

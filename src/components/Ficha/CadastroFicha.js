@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Ficha.css';
+import Box from '@mui/material/Box';
 
-const CadastroFicha = () => {
+
+const CadastroFicha = ({updateTableData}) => {
     const [formData, setFormData] = useState({
         nome: "",
         tipo_ficha: "",
@@ -30,6 +32,7 @@ const CadastroFicha = () => {
             const response = await axios.post('http://168.75.100.153:5000/cadastrar_ficha', formData);
             console.log('Resposta da API:', response.data);
             console.log('Ficha cadastrada com sucesso');
+            updateTableData();
             // Lógica para redirecionar ou exibir mensagem de sucesso
         } catch (error) {
             console.error('Erro ao cadastrar a ficha:', error);
@@ -39,7 +42,21 @@ const CadastroFicha = () => {
 
     return (
         <div className="body">
-            <div className="container">
+            <Box className="box-config"
+                sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                    maxWidth: 600,
+                    width: '80%',
+                    height: '500px',
+                    borderRadius: 4
+                }}
+            > 
                 <h1>CADASTRAR FICHA</h1>
                 <form>
                     <div className="input-row">
@@ -78,6 +95,7 @@ const CadastroFicha = () => {
                                 name="tipo_ficha"
                                 type="text"
                                 onChange={(e) => handleInputChange('tipo_ficha', e.target.value)}
+                                defaultValue="Player"
                             >
                                 <option type="text" value="Player">Player</option>
                                 <option type="text" value="Veiculo">Veículo</option>
@@ -133,7 +151,7 @@ const CadastroFicha = () => {
                 </form>
                 <button className="button-custom-enviar" onClick={cadastrarFicha}>Cadastrar Ficha</button>
                 {errorMessage && <p>{errorMessage}</p>}
-            </div>
+                </Box>
         </div>
     );
 };
