@@ -74,7 +74,7 @@ function CadastroMesa() {
 
   return (
     <div>
-      <h2 className="custom-title">Lista de Usuários</h2>
+      <h2 className="custom-title">Lista de Mesas</h2>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
